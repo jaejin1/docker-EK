@@ -1,7 +1,7 @@
 version: '3'
 services:
   elasticsearch:
-    image: elasticsearch:v1
+    image: ${ELASTICSEARCH}:${TAG}
     #build:
     #  context: docker/elasticsearch/
     #  args:
@@ -25,7 +25,7 @@ services:
     networks:
       - ek
   kibana:
-    image: kibana:v1
+    image: ${KIBANA}:${TAG}
     #build:
     #  context: docker/kibana/
     #  args:
