@@ -36,6 +36,12 @@ TAG={tag name}
 $ docker-compose up -d
 ```
 
+Search Guard must be initialized after Elasticsearch is started:
+
+```
+$ docker-compose exec -T elasticsearch bin/init_sg.sh
+```
+
 ## Check connection
 
 #### Elasticsearch
