@@ -1,0 +1,46 @@
+version: '3'
+services:
+  elasticsearch:
+    image: elasticsearch:v1
+    #build:
+    #  context: docker/elasticsearch/
+    #  args:
+    #    ELK_VERSION: $ELK_VERSION
+    #    SG_VERSION: $SG_VERSION
+    volumes:
+      - ./docker/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+      - ./docker/elasticsearch/config/jvm.options:/usr/share/elasticsearch/config/jvm.options
+      - ./docker/elasticsearch/log4j2.properties:/usr/share/elasticsearch/config.log4j2.properties
+      - ./data:/var/data/elasticsearch
+      - ./log:/var/log/elasticsearch
+    ports:
+        - "19200:9200"
+        - "19300:9300"
+    environment:
+        ES_JAVA_OPTS: "-Xmx1024m -Xms1024m"
+    ulimits:
+        nofile:
+          soft: 90000
+          hard: 90000
+    networks:
+      - ek
+  kibana:
+    image: kibana:v1
+    #build:
+    #  context: docker/kibana/
+    #  args:
+    #    ELK_VERSION: $ELK_VERSION
+    #    SG_VERSION_KIBANA: $SG_VERSION_KIBANA
+    volumes:
+      - ./docker/kibana/config/:/usr/share/kibana/config:ro
+    ports:
+      - "5601:5601"
+    networks:
+      - ek
+    depends_on:
+      - elasticsearch
+
+networks:
+  ek:
+    driver: bridge
+

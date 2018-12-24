@@ -1,0 +1,26 @@
+---
+## Default Kibana configuration from kibana-docker.
+## from https://github.com/elastic/kibana-docker/blob/master/build/kibana/config/kibana.yml
+#
+server.name: kibana
+server.host: "0"
+elasticsearch.url: "http://elasticsearch:9200"
+
+# Time in milliseconds to wait for Elasticsearch to respond to pings. Defaults to the value of
+# the elasticsearch.requestTimeout setting.
+elasticsearch.pingTimeout: 3000
+
+# Time in milliseconds to wait for responses from the back end or Elasticsearch. This value
+# must be a positive integer.
+elasticsearch.requestTimeout: 60000
+
+## Custom configuration
+#
+elasticsearch.username: "kibanaserver"
+elasticsearch.password: "kibanaserver"
+
+xpack.security.enabled: false
+
+elasticsearch.ssl.verificationMode: none
+
+searchguard.cookie.password: "123567818187654rwrwfsfshdhdhtegdhfzftdhncn"

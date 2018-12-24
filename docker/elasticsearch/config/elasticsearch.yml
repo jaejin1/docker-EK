@@ -1,0 +1,39 @@
+---
+## Default Elasticsearch configuration from elasticsearch-docker.
+## from https://github.com/elastic/elasticsearch-docker/blob/master/build/elasticsearch/elasticsearch.yml
+#
+cluster.name: elasticsearch_loopchain
+network.host: 0.0.0.0
+
+# ----------------------------------- Paths ------------------------------------
+#
+# Path to directory where to store the data (separate multiple locations by comma):
+#
+path.data: /var/data/elasticsearch
+#
+# Path to log files:
+#
+path.logs: /var/log/elasticsearch
+
+# minimum_master_nodes need to be explicitly set when bound on a public IP
+# set to 1 to allow single node clusters
+# Details: https://github.com/elastic/elasticsearch/pull/17288
+discovery.zen.minimum_master_nodes: 1
+
+## Use single node discovery in order to disable production mode and avoid bootstrap checks
+## see https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
+#
+discovery.type: single-node
+
+xpack.security.enabled: false
+
+## Search Guard
+#
+searchguard.enterprise_modules_enabled: false
+
+searchguard.ssl.transport.keystore_filepath: sg/node-0-keystore.jks
+searchguard.ssl.transport.truststore_filepath: sg/truststore.jks
+searchguard.ssl.transport.enforce_hostname_verification: false
+
+searchguard.authcz.admin_dn:
+  - "CN=kirk,OU=client,O=client,l=tEst,C=De"
